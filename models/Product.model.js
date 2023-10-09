@@ -16,7 +16,7 @@ const SizesSchema = new Schema({
 const ProductSchema = new Schema({
   title: { type: String, required: true },
   category: { type: String, required: true },
-  line: { type: String, required: true },
+  name: { type: String, required: true },
   price: { type: Number, required: true },
   image: { type: String, required: true },
   available_quantity: { type: Number },
