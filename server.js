@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import { db } from './config/db.config.js';
 import ProductsRouter from './routes/product.router.js';
+import UsersRouter from './routes/user.routes.js';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors());
 // Route middlewares
 app.use('/api/v1', ProductsRouter);
+app.use('/api/v1', UsersRouter);
 
 db(); // Connect to database
 
