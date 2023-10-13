@@ -4,10 +4,10 @@ import jwt from 'jsonwebtoken';
 
 export const signUp = async (req, res) => {
   try {
-    const { name, lastname, email, password, address, city, state, country, phone } = req.body;
+    const { name, lastname, email, password } = req.body;
 
     // Check if user filled all form fields
-    if ( !name || !lastname || !email || !password || !address || !city || !state || !country || !phone ) {
+    if ( !name || !lastname || !email || !password ) {
       return res.status(400).json({message: 'Por favor rellene todos los campos.'});
     }
 
@@ -24,11 +24,11 @@ export const signUp = async (req, res) => {
       lastname,
       email,
       password: passwordEncrypt,
-      address,
-      city,
-      state,
-      country,
-      phone,
+      address: "",
+      city: "",
+      state: "",
+      country: "",
+      phone: "",
       role: "[USER]",
       orders: []
     })

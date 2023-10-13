@@ -7,11 +7,11 @@ const UserSchema = new Schema({
   lastname: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  address: { type: String, required: true },
-  city: { type: String, required: true },
-  state: { type: String, required: true },
-  country: { type: String, required: true },
-  phone: { type: String, required: true },
+  address: { type: String },
+  city: { type: String },
+  state: { type: String },
+  country: { type: String },
+  phone: { type: String },
   role: { type: String, required: true },
   orders: { type: Array }
 }, { versionKey: false });
