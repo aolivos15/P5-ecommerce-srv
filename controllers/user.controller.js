@@ -100,3 +100,21 @@ export const verifyUser = async (req, res) => {
     return res.status(500).json({message: 'No se pudo verificar al usuario.'});
   }
 }
+
+
+// Update user data
+export const updateUser = async (req, res) => {
+  try {
+    const userID = req.params.id;
+    const updateData = req.body;
+
+    const updateUser = await User.findByIdAndUpdate(userID, updateData, { new: true });
+    if (!updateUser) {
+      return res.status(404).json({message: `No se pudo encontrar un usuario con ID ${userID}.`});
+    }
+    res.status(202).json({message: `Usuario ${updateUser.name} ${updateUser.lastname} actualizado con éxito.`});
+
+  } catch (error) {
+    res.status(500).json({message: "No se pudo actualizar los datos del usuario."});
+  }
+}
