@@ -106,12 +106,25 @@ export const verifyUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const userID = req.params.id;
-    const updateData = req.body;
-
-    const updateUser = await User.findByIdAndUpdate(userID, updateData, { new: true });
-    if (!updateUser) {
+    const user = await User.findById(userID);
+    if (!user) {
       return res.status(404).json({message: `No se pudo encontrar un usuario con ID ${userID}.`});
     }
+
+    const updateData = {
+      name: req.body.name,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      address: req.body.address,
+      city: req.body.city,
+      state: req.body.state,
+      country: req.body.country,
+      phone: req.body.phone,
+      orders: [...user.orders, req.body.order]
+    }
+
+    const updateUser = await User.findByIdAndUpdate(userID, updateData, { new: true });
+
     res.status(202).json({message: `Usuario ${updateUser.name} ${updateUser.lastname} actualizado con éxito.`});
 
   } catch (error) {
