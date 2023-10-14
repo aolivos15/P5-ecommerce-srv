@@ -79,15 +79,18 @@ export const logIn = async (req, res) => {
       }
     }, process.env.SECRET_KEY);
 
-    res.json(token);
+    // Get user data excluding password
+    const user = await User.findOne({email: email}).select('-password -role -orders');
+
+    res.json({token, user});
 
   } catch (error) {
     res.status(403).json({message: 'No se pudo verificar tu cuenta. Por favor, inténtalo más tarde.'});
   }
 }
 
-// Fx para verificar que exista el usuario y trae sus datos
-// Se usa siempre en conjunto con authRequire, para asegurarse de que sólo valide usuarios autorizados/logineados
+// Verify that user exists and get their data.
+// Use together with authRequire to get only logged in / authenticated users
 export const verifyUser = async (req, res) => {
   try {
     const user = await User.findById(req.data.id).select('-password');
